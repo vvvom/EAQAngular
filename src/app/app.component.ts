@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from './services/user.service';
 import {Response} from './models/Response';
+import {CafeService} from './services/cafe.service';
 
 @Component({
   selector: 'app-root',
@@ -10,37 +10,34 @@ import {Response} from './models/Response';
 export class AppComponent implements OnInit {
 
   constructor(
-    private userService: UserService
+    private cafeService: CafeService
   ) {
   }
 
-  userData;
-  data = [];
+  cafeData;
+  isLogged = !!localStorage.getItem('token');
 
-  sendUserData(name: string, password: string): void {
+  sendCafeData(name: string, password: string): void {
 
-    this.userData = {
+    this.cafeData = {
       name,
       password
     };
 
-    this.userService.sendDataUser(this.userData)
-      .subscribe( (response: Response) => {
-          if (response.success) {
-            localStorage.setItem('token', response.message);
-          }
+    this.cafeService.sendDataCafe(this.cafeData)
+      .subscribe((response: Response) => {
+        if (response.success) {
+          localStorage.setItem('token', response.message);
+          this.isLogged = true;
+        }
       });
   }
 
   ngOnInit(): void {
   }
 
-  getData() {
-      this.userService.getData()
-        .subscribe((response: Response) => {
-          if (response.success) {
-            this.data = response.message;
-          }
-        });
+  signOut() {
+    localStorage.removeItem('token');
+    this.isLogged = false;
   }
 }

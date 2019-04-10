@@ -1,40 +1,29 @@
 <h1>Logination</h1>
 
-<form #loginForm="ngForm" (ngSubmit)="sendUserData(name.value, password.value)">
+<form *ngIf="!isLogged" #loginForm="ngForm" (ngSubmit)="sendCafeData(name.value, password.value)">
 
   <label>Name: </label>
-  <input  type="text"
-          #name
-          name="name"
-          ngModel
-          required
+  <input type="text"
+         #name
+         name="name"
+         ngModel
+         required
   >
 
   <label>Password: </label>
-  <input  type="password"
-          #password
-          name="password"
-          ngModel
-          required
+  <input type="password"
+         #password
+         name="password"
+         ngModel
+         required
   >
 
   <button
     type="submit"
     [disabled]="loginForm.invalid"
-  >Send</button>
-
-  <button (click)="getData()"
-  >GET</button>
-
-  <h2>PAYMENTS</h2>
-
-  <div>
-    <ul>
-      <li *ngFor="let pay of data">
-        {{pay.type}}
-      </li>
-    </ul>
-  </div>
+  >Send
+  </button>
 
 </form>
 
+<button *ngIf="isLogged" (click)="signOut()">Sign Out</button>

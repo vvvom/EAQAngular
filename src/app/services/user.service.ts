@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Hosts} from '../models/Hosts';
@@ -18,9 +18,4 @@ export class UserService {
   sendDataUser(userBody): Observable<Response> {
     return this.http.post<Response>(`${Hosts.API_HOST}/${this.userApiUrl}`, userBody);
   }
-
-  getData(): Observable<Response> {
-    return this.http.get<Response>(`${Hosts.API_HOST}/payments`);
-  }
-
 }
