@@ -1,0 +1,5 @@
+<button *ngIf="!isLogged" (click)="loginClick()">LOGIN</button>
+<button *ngIf="isLogged" (click)="signOutClick()">SIGN OUT</button>
+
+<app-main-option *ngIf="isLogged"></app-main-option>
+
