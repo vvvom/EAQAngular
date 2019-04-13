@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from './services/user.service';
+import {CafeService} from './services/cafe.service';
 import {Response} from './models/Response';
 
 @Component({
@@ -10,20 +10,22 @@ import {Response} from './models/Response';
 export class AppComponent implements OnInit {
 
   constructor(
-    private userService: UserService
+    private cafeService: CafeService
   ) {
   }
 
-  userData;
+
+  cafeData;
   data = [];
 
-  sendDataUser(name: string, password: string): void {
-    this.userData = {
+
+  sendDataCafe(name: string, password: string): void {
+    this.cafeData = {
       name,
       password
     };
 
-    this.userService.sendDataUser(this.userData)
+    this.cafeService.sendDataCafe(this.cafeData)
       .subscribe((response: Response) => {
         if (response.success) {
           localStorage.setItem('token', response.message);
@@ -31,11 +33,11 @@ export class AppComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   getData() {
-    this.userService.getData()
+    this.cafeData.getData()
       .subscribe((response: Response) => {
         if (response.success) {
           this.data = response.message;

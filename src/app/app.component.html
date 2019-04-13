@@ -1,4 +1,6 @@
-<form #login="ngForm" (ngSubmit)="sendDataUser(name.value, password.value)">
+
+<form #login="ngForm" (ngSubmit)="sendDataCafe(name.value, password.value)">
+  <h1>Login cafe</h1>
   <input required
          ngModel
          type="text"
@@ -16,13 +18,4 @@
   >
   <div *ngIf="error" class="error"> This field is empty</div><br><br>
   <button type="submit" [disabled]="login.invalid">Send</button>
-  <button type="submit" (click)="getData()">Get</button>
-
-
-  <h2>Payments</h2>
-  <div>
-    <ul>
-      <li *ngFor="let  pay of data">{{pay.type}}</li>
-    </ul>
-  </div>
 </form>
