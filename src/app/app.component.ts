@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Response} from './models/Response';
 import {CafeService} from './services/cafe.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,15 @@ import {CafeService} from './services/cafe.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private cafeService: CafeService
+    private cafeService: CafeService,
+    private router: Router
   ) {
   }
 
   cafeData;
   isLogged = !!localStorage.getItem('token');
+  URL;
+  isMenuClicked;
 
   sendCafeData(name: string, password: string): void {
 
@@ -29,15 +33,17 @@ export class AppComponent implements OnInit {
         if (response.success) {
           localStorage.setItem('token', response.message);
           this.isLogged = true;
+          this.router.navigateByUrl('/main/option');
         }
       });
-  }
-
-  ngOnInit(): void {
   }
 
   signOut() {
     localStorage.removeItem('token');
     this.isLogged = false;
+  }
+
+
+  ngOnInit(): void {
   }
 }
