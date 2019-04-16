@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
         if (response.success) {
           localStorage.setItem('token', response.message);
           this.isLogged = true;
-          this.router.navigateByUrl('/main/option');
+          this.router.navigateByUrl('/menu/0');
         }
       });
   }
@@ -41,6 +41,8 @@ export class AppComponent implements OnInit {
   signOut() {
     localStorage.removeItem('token');
     this.isLogged = false;
+    this.router.navigateByUrl('/');
+
   }
 
 
