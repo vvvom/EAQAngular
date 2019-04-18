@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Response} from './models/Response';
 import {CafeService} from './services/cafe.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,40 +12,29 @@ export class AppComponent implements OnInit {
 
   constructor(
     private cafeService: CafeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
   }
 
-  cafeData;
   isLogged = !!localStorage.getItem('token');
-  URL;
-  isMenuClicked;
-
-  sendCafeData(name: string, password: string): void {
-
-    this.cafeData = {
-      name,
-      password
-    };
-
-    this.cafeService.sendDataCafe(this.cafeData)
-      .subscribe((response: Response) => {
-        if (response.success) {
-          localStorage.setItem('token', response.message);
-          this.isLogged = true;
-          this.router.navigateByUrl('/menu/0');
-        }
-      });
-  }
+  table;
 
   signOut() {
     localStorage.removeItem('token');
     this.isLogged = false;
-    this.router.navigateByUrl('/');
-
+    this.router.navigateByUrl('/cafe/login');
   }
 
+  subscribeToLogin() {
+    this.cafeService.isLogged.subscribe((data) => {
+      this.isLogged = data;
+    });
+  }
 
   ngOnInit(): void {
+    this.table = +this.route.snapshot.paramMap.get('table');
+    this.subscribeToLogin();
+    // this.router.navigateByUrl('menu/table/0');
   }
 }

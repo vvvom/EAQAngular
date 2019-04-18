@@ -1,4 +1,6 @@
-<div><a routerLink="/menu/categories/food">FOOD</a></div>
-<div><a routerLink="/menu/categories/drink">DRINK</a></div>
+<div><a (click)="foodClick()">FOOD</a></div>
+<div><a (click)="drinkClick()">DRINK</a></div>
+<div *ngIf='!isLogged'>basket</div>
+<div *ngIf="type === 'food'">its food</div>
+<div *ngIf="type === 'drink'">its drink</div>
 
-<app-menu-categories></app-menu-categories>

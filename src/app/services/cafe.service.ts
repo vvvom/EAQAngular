@@ -11,9 +11,10 @@ export class CafeService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
-  isMenuClicked = new BehaviorSubject(false);
+ isLogged = new BehaviorSubject(!!localStorage.getItem('token'));
 
 
   cafeApiUrl = 'cafes';

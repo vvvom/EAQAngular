@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CafeService} from '../services/cafe.service';
 
 @Component({
   selector: 'app-menu-workspace',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuWorkspaceComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private route: ActivatedRoute,
+    private cafeService: CafeService
+  ) {
   }
 
+  table;
+  type = 'food';
+  isLogged;
+
+  ngOnInit() {
+    this.table = +this.route.snapshot.paramMap.get('table');
+    this.subscribeToLogin();
+  }
+
+  subscribeToLogin() {
+    this.cafeService.isLogged.subscribe((data) => {
+      this.isLogged = data;
+    });
+  }
+
+  foodClick() {
+    this.type = 'food';
+  }
+
+  drinkClick() {
+    this.type = 'drink';
+  }
 }

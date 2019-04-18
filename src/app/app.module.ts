@@ -7,16 +7,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {MainOptionComponent} from './main-option/main-option.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {MenuWorkspaceComponent} from './menu-workspace/menu-workspace.component';
-import {MenuCategoriesComponent} from './menu-categories/menu-categories.component';
 import {StatisticWorkspaceComponent} from './statistic-workspace/statistic-workspace.component';
+import {CafeLoginComponent} from './cafe-login/cafe-login.component';
+import {CafeService} from './services/cafe.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainOptionComponent,
     MenuWorkspaceComponent,
-    MenuCategoriesComponent,
-    StatisticWorkspaceComponent
+    StatisticWorkspaceComponent,
+    CafeLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,8 @@ import {StatisticWorkspaceComponent} from './statistic-workspace/statistic-works
     AppRoutingModule
   ],
   providers: [
-    UserService
+    UserService,
+    CafeService
   ],
   bootstrap: [AppComponent]
 })
