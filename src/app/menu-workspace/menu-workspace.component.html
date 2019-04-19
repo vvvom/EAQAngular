@@ -1,5 +1,6 @@
-<div>Food</div>
-<div>Drink</div>
+<div><a (click)="foodClicked()" >Food</a></div>
+<div><a (click)="drinkClicked()" >Drink</a></div>
+<div *ngIf="!isLogged">basket</div>
 
-<!--<a routerLink="/menu/:table/categories/food"></a>-->
-<!--<a routerLink="/menu/:table/categories/drink"></a>-->
+<div *ngIf="type ==='food'"> it is food</div>
+<div *ngIf="type ==='drink'"> it is drink</div>

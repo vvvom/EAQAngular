@@ -1,31 +1,4 @@
-<h1 *ngIf="!isLogged">Logination</h1>
-
-<form *ngIf="!isLogged" #loginForm="ngForm" (ngSubmit)="sendCafeData(name.value, password.value)">
-
-  <label>Name: </label>
-  <input  type="text"
-          #name
-          name="name"
-          ngModel
-          required
-  >
-
-  <label>Password: </label>
-  <input  type="password"
-          #password
-          name="password"
-          ngModel
-          required
-  >
-
-  <button
-    type="submit"
-    [disabled]="loginForm.invalid"
-  >Send</button>
-
-
-</form>
-
 <button *ngIf="isLogged" (click)="signOut()">Sign Out</button>
 
 <app-main-option *ngIf="isLogged"></app-main-option>
+<router-outlet></router-outlet>

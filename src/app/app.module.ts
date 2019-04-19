@@ -9,6 +9,7 @@ import { MainOptionComponent } from './main-option/main-option.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { MenuWorkspaceComponent } from './menu-workspace/menu-workspace.component';
 import { StatisticWorkspaceComponent } from './statistic-workspace/statistic-workspace.component';
+import { CafeLoginComponent } from './cafe-login/cafe-login.component';
 
 
 
@@ -17,7 +18,8 @@ import { StatisticWorkspaceComponent } from './statistic-workspace/statistic-wor
     AppComponent,
     MainOptionComponent,
     MenuWorkspaceComponent,
-    StatisticWorkspaceComponent
+    StatisticWorkspaceComponent,
+    CafeLoginComponent
   ],
   imports: [
     BrowserModule,

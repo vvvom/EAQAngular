@@ -1,10 +1,8 @@
 <ul>
   <li (click)="isMenuClicked()" routerLink="menu/0"> Menu </li>
   <li (click)="isStatisticClicked()" routerLink="statistic">Statistic</li>
-  <li (click)="isChangePasswordClicked">Change password</li>
+  <li (click)="isChangePasswordClicked()">Change password</li>
 </ul>
 
-
 <app-menu-workspace *ngIf="showMenu"></app-menu-workspace>
-
 <app-statistic-workspace *ngIf="showStatistic"></app-statistic-workspace>
