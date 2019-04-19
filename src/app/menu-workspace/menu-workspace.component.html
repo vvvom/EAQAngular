@@ -2,5 +2,11 @@
 <div><a (click)="drinkClick()">DRINK</a></div>
 <div *ngIf='!isLogged'>basket</div>
 <div *ngIf="type === 'food'">its food</div>
-<div *ngIf="type === 'drink'">its drink</div>
+<div *ngIf="type === 'drink'">
+  <ul>
+    <li *ngFor="let type of typeDrinks">
+      {{type.type}}
+    </li>
+  </ul>
+</div>
 

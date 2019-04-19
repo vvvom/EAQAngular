@@ -10,6 +10,8 @@ import {MenuWorkspaceComponent} from './menu-workspace/menu-workspace.component'
 import {StatisticWorkspaceComponent} from './statistic-workspace/statistic-workspace.component';
 import {CafeLoginComponent} from './cafe-login/cafe-login.component';
 import {CafeService} from './services/cafe.service';
+import {TypeDrinkService} from './services/type-drink.service';
+import {TypeFoodService} from './services/type-food.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {CafeService} from './services/cafe.service';
   ],
   providers: [
     UserService,
-    CafeService
+    CafeService,
+    TypeDrinkService,
+    TypeFoodService
   ],
   bootstrap: [AppComponent]
 })
