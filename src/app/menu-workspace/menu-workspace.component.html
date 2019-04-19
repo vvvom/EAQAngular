@@ -10,3 +10,24 @@
   </ul>
 </div>
 
+<button *ngIf="isLogged && !showAddTypeForm" (click)="openInputAddType()">Add type</button>
+
+<form *ngIf="showAddTypeForm" #addTypeForm="ngForm" (ngSubmit)="sendTypeData(type.value); addTypeForm.reset()">
+
+  <label>Name: </label>
+  <input type="text"
+         #type
+         name="type"
+         ngModel
+         required
+  >
+  <button
+    type="submit"
+    [disabled]="addTypeForm.invalid"
+  >Send
+  </button>
+  <button (click)="closeForm()">Cancel
+  </button>
+
+</form>
+

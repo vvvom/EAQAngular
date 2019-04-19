@@ -4,6 +4,7 @@ import {CafeService} from '../services/cafe.service';
 import {TypeDrinkService} from '../services/type-drink.service';
 import {Response} from '../models/Response';
 import {TypeDrink} from '../models/TypeDrink';
+import {TypeFoodService} from '../services/type-food.service';
 
 @Component({
   selector: 'app-menu-workspace',
@@ -15,7 +16,8 @@ export class MenuWorkspaceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cafeService: CafeService,
-    private typeDrinkService: TypeDrinkService
+    private typeDrinkService: TypeDrinkService,
+    private typeFoodServise: TypeFoodService
   ) {
   }
 
@@ -23,6 +25,9 @@ export class MenuWorkspaceComponent implements OnInit {
   type = 'food';
   isLogged;
   typeDrinks: TypeDrink[];
+  showAddTypeForm = false;
+  typeData;
+
 
   ngOnInit() {
     this.table = +this.route.snapshot.paramMap.get('table');
@@ -32,8 +37,8 @@ export class MenuWorkspaceComponent implements OnInit {
 
   getAllTypeDrink() {
     this.typeDrinkService.getAllTypeDrinkData()
-      .subscribe((response: Response) =>{
-        if (response.success){
+      .subscribe((response: Response) => {
+        if (response.success) {
           this.typeDrinks = response.message;
         }
       });
@@ -51,5 +56,28 @@ export class MenuWorkspaceComponent implements OnInit {
 
   drinkClick() {
     this.type = 'drink';
+  }
+
+  openInputAddType() {
+    this.showAddTypeForm = true;
+  }
+
+  sendTypeData(type: string): void {
+    this.typeData = {
+      type
+    };
+    if (this.type === 'drink') {
+      this.typeDrinkService.addNewTypeDrink(this.typeData)
+        .subscribe((response: Response) => {
+          if (response.success) {
+            console.log(response.message);
+            this.getAllTypeDrink();
+          }
+        });
+    }
+  }
+
+  closeForm() {
+    this.showAddTypeForm = false;
   }
 }
