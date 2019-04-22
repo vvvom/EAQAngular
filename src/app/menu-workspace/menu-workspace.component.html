@@ -1,17 +1,28 @@
 <div><a (click)="foodClick()">FOOD</a></div>
 <div><a (click)="drinkClick()">DRINK</a></div>
 <div *ngIf='!isLogged'>basket</div>
-<div *ngIf="type === 'food'">its food</div>
-<div *ngIf="type === 'drink'">
+
+<div *ngIf="type === 'food'">
+  <!--!!!!!!!!!!!!!!!!!!!itar for type Food!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
   <ul>
-    <li *ngFor="let type of typeDrinks">
+    <li *ngFor="let type of typeFood">
       {{type.type}}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="type === 'drink'">
+  <!--!!!!!!!!!!!!!!!!!!!itar for type Drink!!!!!!!!!!!!!!!!!!!!!!!-->
+  <ul>
+    <li *ngFor="let type of typeDrink">
+      {{type.type}} <button (click)="deleteTypeDrink(type.type)">Delete</button>
     </li>
   </ul>
 </div>
 
 <button *ngIf="isLogged && !showAddTypeForm" (click)="openInputAddType()">Add type</button>
 
+<!--add new Type Drink or Food-->
 <form *ngIf="showAddTypeForm" #addTypeForm="ngForm" (ngSubmit)="sendTypeData(type.value); addTypeForm.reset()">
 
   <label>Name: </label>

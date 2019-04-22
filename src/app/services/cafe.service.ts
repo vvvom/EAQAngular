@@ -16,7 +16,6 @@ export class CafeService {
 
  isLogged = new BehaviorSubject(!!localStorage.getItem('token'));
 
-
   cafeApiUrl = 'cafes';
 
   sendDataCafe(cafeBody): Observable<Response> {

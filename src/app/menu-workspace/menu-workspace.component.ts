@@ -4,6 +4,7 @@ import {CafeService} from '../services/cafe.service';
 import {TypeDrinkService} from '../services/type-drink.service';
 import {Response} from '../models/Response';
 import {TypeDrink} from '../models/TypeDrink';
+import {TypeFood} from '../models/TypeFood';
 import {TypeFoodService} from '../services/type-food.service';
 
 @Component({
@@ -24,22 +25,34 @@ export class MenuWorkspaceComponent implements OnInit {
   table;
   type = 'food';
   isLogged;
-  typeDrinks: TypeDrink[];
+  typeDrink: TypeDrink[];
+  typeFood: TypeFood[];
   showAddTypeForm = false;
   typeData;
-
 
   ngOnInit() {
     this.table = +this.route.snapshot.paramMap.get('table');
     this.subscribeToLogin();
+    this.getAllTypeFood();
     this.getAllTypeDrink();
   }
 
+  // get Type Drink
   getAllTypeDrink() {
     this.typeDrinkService.getAllTypeDrinkData()
       .subscribe((response: Response) => {
         if (response.success) {
-          this.typeDrinks = response.message;
+          this.typeDrink = response.message;
+        }
+      });
+  }
+
+  // get Type Food
+  getAllTypeFood() {
+    this.typeFoodServise.getAllTypeFoodData()
+      .subscribe((response: Response) => {
+        if (response.success) {
+          this.typeFood = response.message;
         }
       });
   }
@@ -62,6 +75,7 @@ export class MenuWorkspaceComponent implements OnInit {
     this.showAddTypeForm = true;
   }
 
+  // add new TypeDrink
   sendTypeData(type: string): void {
     this.typeData = {
       type
@@ -74,10 +88,32 @@ export class MenuWorkspaceComponent implements OnInit {
             this.getAllTypeDrink();
           }
         });
+    } else if (this.type === 'food') {
+      this.typeFoodServise.addNewTypeFood(this.typeData)
+        .subscribe((response: Response) => {
+          if (response.success) {
+            console.log(response.message);
+            this.getAllTypeFood();
+          }
+        });
     }
   }
 
   closeForm() {
     this.showAddTypeForm = false;
   }
+
+// delete DRINK TYPE
+  deleteTypeDrink(type) {
+    this.typeDrinkService.deleteTypeDrink(type)
+      .subscribe((response: Response) => {
+        if (response.success) {
+          console.log(response.message);
+          this.getAllTypeDrink();
+        }
+      });
+  }
+
+  // delete FOOD TYPE
+
 }
