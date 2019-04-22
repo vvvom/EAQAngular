@@ -15,7 +15,9 @@
   <!--!!!!!!!!!!!!!!!!!!!itar for type Drink!!!!!!!!!!!!!!!!!!!!!!!-->
   <ul>
     <li *ngFor="let type of typeDrink">
-      {{type.type}} <button (click)="deleteTypeDrink(type.type)">Delete</button>
+      {{type.type}}
+      <button (click)="deleteTypeDrink(type.type)">Delete</button>
+      <button (click)="editeTypeDrink(type.type)">Edite</button>
     </li>
   </ul>
 </div>
